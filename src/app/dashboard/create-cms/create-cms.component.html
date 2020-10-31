@@ -1,0 +1,78 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="content-header">Cms Form</div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <form [formGroup]="CmsForm"  novalidate>
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i>Cms Info</h4>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Cms Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <select id="projectinput5" formControlName="cms_id"  class="form-control">
+                                                <option value="" selected="" disabled="">Cms List</option>
+                                                <option *ngFor="let cms of Cmslist" value="{{cms.id}}">{{cms.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Cms Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter cms name" class="form-control" formControlName="name" required name>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="CmsForm.get('name').errors && (CmsForm.get('name').touched || CmsForm.get('name').dirty)">
+                                                <span *ngIf="CmsForm.get('name').errors.required">Title is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Cms Description</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <ck-editor  skin="moono-lisa" language="en" formControlName="description" required description *ngIf="descen.description"></ck-editor>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="CmsForm.get('description').errors && (CmsForm.get('description').touched || CmsForm.get('description').dirty)">
+                                                <span *ngIf="CmsForm.get('description').errors.required">Description is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions center">
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Gotolist()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                                <button *ngIf="showbutton" type="submit" class="btn btn-raised btn-raised btn-primary" (click)="editcms()"> <i class="fa fa-check-square-o"></i>Submit</button>
+                                <button *ngIf="!showbutton" type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createcms()"> <i class="fa fa-check-square-o"></i>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

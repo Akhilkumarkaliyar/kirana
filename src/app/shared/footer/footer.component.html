@@ -1,0 +1,59 @@
+<!--Footer Starts-->
+<footer>
+    <div class="row  gradient-blackberry" *ngIf="!checkfooter">
+        <div class="card-body">
+            <div class="white text-center font-medium-2">
+                Know Us
+            </div>
+            <a class="success p-0" (click)="goTocms(7)"><p class="text-center" >About Us</p></a>
+            <a class="success p-0" (click)="goTocms(3)"><p class="text-center">Contact Us</p></a>
+            <a class="success p-0" (click)="goTocms(5)"><p class="text-center">Ayurveda Articles</p></a>
+            <a class="success p-0" (click)="goTocms(6)"><p class="text-center">Diabetes Care Plan</p></a>
+        </div>
+        <div class="card-body">
+            <div class="white text-center font-medium-2">
+                Our Policies
+            </div>
+            <a class="success p-0" (click)="goTocms(1)"><p class="text-center">Privacy Policy</p></a>
+            <a class="success p-0" (click)="goTocms(2)"><p class="text-center">Terms and Conditions</p></a>
+            <a class="success p-0" (click)="goTocms(8)"><p class="text-center">Editorial Policy</p></a>
+            <a class="success p-0" (click)="goTocms(4)"><p class="text-center">Return Policy</p></a>
+        </div>
+        <div class="card-body">
+            <div class="white text-center font-medium-2">
+                ContactInfo
+            </div> 
+            <p class="text-center">Order Medicines</p>
+            <p class="text-center">Book Lab Tests</p>
+            
+        </div>
+        <div class="card-body">
+            <div class="white text-center font-medium-2">
+                Connect
+            </div>
+            <p class="text-center">
+                Social Links
+            </p>
+            <p class="text-center">
+                <a class="success p-0" (click)="goTocms(2)"><i class="ft-facebook"></i></a>
+                <a class="success p-0" (click)="goTocms(2)"><i class="ft-twitter"></i></a>
+                <a class="success p-0" (click)="goTocms(2)"><i class="ft-instagram"></i></a>
+                <a class="success p-0" (click)="goTocms(2)"><i class="ft-mail"></i></a>
+            </p>
+         </div> 
+    </div>
+</footer>
+<!--Footer Ends-->
+
+
+
+<!--Footer Starts-->
+<footer *ngIf="checkfooter" class="doNotPrint">
+    <div class="container-fluid">
+        <p class="copyright text-center">
+                Copyright  &copy;  {{currentDate | date: 'yyyy'}} <a id="pixinventLink" href="#">Kirana</a>, All rights reserved.          
+        </p>
+        
+    </div>
+</footer>
+<!--Footer Ends-->

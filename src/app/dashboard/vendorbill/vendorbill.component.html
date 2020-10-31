@@ -1,0 +1,522 @@
+<!-- Filter Datatable Options Starts -->
+<section id="extended">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="row akhil">
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-raised mr-1 btn-primary" (click)="goToaddvendorbill(':id')">Add Vendor New Bill</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <form [formGroup]="Vendorbillsearch"  novalidate>
+                                    <div class="row">
+                                        <div clss="col-lg-12">
+                                            <input type="text" placeholder="Search By Bill No" (keyup)="getbill()" class="form-control" formControlName="search" required>
+                                        </div>
+                                        <div clss="col-lg-12">
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="Vendorbillsearch.get('search').errors && (Vendorbillsearch.get('search').touched || Vendorbillsearch.get('search').dirty)">
+                                                <span *ngIf="Vendorbillsearch.get('search').errors.required">Enter some value</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <select id="projectinput5" class="form-control" id="getpage" (change)="getrecord()">
+                                        <option value="10"  selected>10</option>
+                                        <option value="1000">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <a class="btn btn-raised mr-1 btn-primary" (click)="exportAsXLSX()">Download List</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Vendor Bill List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-left">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Vendor Name</th>
+                                    <th>Bill No</th>
+                                    <th>Bill Date</th>
+                                    <th>₹ Amount</th>
+                                    <th>₹ Pending Amount</th>
+                                    <!--<th>Add Exit Product</th>-->
+                                    <th>Add New Product</th>
+                                    <th>View Product</th>
+                                    <th>Status</th>
+                                   <!--<th>Actions</th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of vendorbill; index as i">
+                                    <td>{{i+1}}</td>
+                                    <td>{{product.name}}</td>
+                                    <td>{{product.bill_no}}</td>
+                                    <td>{{product.bill_date | date: 'dd-MM-yyyy'}}</td>
+                                    <td>{{product.amount}}</td>
+                                    <td>{{product.pending_amount}}</td>
+                                    <td><button class="btn-sm btn-lg btn-outline-primary" (click)="exit(exitproduct,product.id)">Add Product</button></td>
+                                    <!--<td><button class="btn-sm btn-lg btn-outline-primary" (click)="open(content,product.id)">Add New Product</button></td>-->
+                                    <td><button class="btn-sm btn-lg btn-outline-primary" (click)="view(contents,product.id)">View Product</button></td>
+                                    <td>{{product.paid}}</td>
+                                    <!--<td>
+                                       <a class="success p-0" data-original-title="" title="" (click)="goToCreatevendorbill(product.id)">
+                                            <i class="ft-edit-2 font-medium-3 mr-2"></i>Edit
+                                        </a>
+                                    </td>-->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-body" *ngIf="totalRecords !== ''">
+                        <div class="card-block">
+                            <ngb-pagination (pageChange)="handleChange($event)" [collectionSize]="totalRecords" [(page)]="initialPageValue" [maxSize]="5" [rotate]="true" [pageSize]="10" [boundaryLinks]="true"></ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card-block">
+            <ng-template #exitproduct let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Product</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" *ngIf="form == '3'">
+                    <!--<p>One fine body&hellip;</p>-->
+                    <input type="hidden" id="billid"  value="{{billid}}">
+                    <table class="table table-responsive-md text-left">
+                        <thead>
+                            <tr>
+                                <th>Sr.No.</th>
+                                <th>Hsn Code</th>
+                                <th>Product Name</th>
+                                <th>Gst %</th>
+                                <th>Expiry</th>
+                                <th>Quantity</th>
+                                <th>Mrp</th>
+                                <th>Purchase Price</th>
+                                <th>Batch No</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of billdata; index as i">
+                                <td>{{itemsPerPage *(currentPage-1)+i+1}}</td>
+                                <td>{{product.hsn_code}}</td>
+                                <td>{{product.name}}</td>
+                                <td> {{product.gst}}</td>
+                                <td>{{product.expire_date  | date: 'dd-MM-yyyy'}}</td>
+                                <td>{{product.quantity}}</td>
+                                <td>₹ {{product.mrp}}</td>
+                                <td>₹ {{product.available_price}}</td>
+                                <td>{{product.batch_no}}</td>
+                                <td>{{product.quantity*product.available_price}}</td>
+                                <td><button type="button" (click)="deleteproduct(product.sno,product.vid)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row"  *ngIf="form == '1'">
+                    <input type="hidden" id="billid"  value="{{billid}}">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="px-3">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <h4 class="form-section">Search Product</h4>
+                                                    <input type="text"  list="browsers" id="searchproduct" placeholder="Search product" autofocus (keyup)="getProduct()" (change)="addvendorproduct()"   class="form-control" value="{{searchvalue}}" >
+                                                    <datalist id="browsers" *ngIf="productdata !== ''">
+                                                        <option *ngFor="let product of productdata" value="{{product.name}}">
+                                                    </datalist>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body" *ngIf="form == '2'">
+                    <!--<p>One fine body&hellip;</p>-->
+                    <input type="hidden" id="billid"  value="{{billid}}">
+                    <input type="hidden" id="productid"  value="{{productid}}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Purchase Price</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter Amount" class="form-control" value="{{purchaseprice}}" id="purchaseprice">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Mrp</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter Mrp" class="form-control" value="{{mrp}}" id="mrp">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Expire Date</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="date" class="form-control" value="{{exdate | date : 'yyyy-MM-dd'}}" id="expiredate" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Quantity</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter quantity" class="form-control" value="{{quantity}}" id="quantity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Batch No</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter Batch no" class="form-control" value="{{batchno}}" id="batch_no">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" *ngIf="form == '2'">
+                    <button  type="submit"  class="btn btn-raised btn-raised btn-primary" (onsubmit)="c('Close click')" (click)="updateproduct()"> <i class="fa fa-check-square-o"></i>Save</button>
+                    <button type="button" class="btn btn-secondary btn-raised" (click)="c('Close click')">Close</button>
+                </div>
+                       
+                <div class="modal-footer"  *ngIf="form == '1'" >
+                    <button type="button" class="btn btn-secondary btn-raised" (click)="c('Close click')">Close</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card-block">
+            <ng-template #contents let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title">Product List</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--<p>One fine body&hellip;</p>-->
+                    <input type="hidden" id="billidlist"  value="{{billid}}">
+                    <table class="table table-responsive-md text-left">
+                        <thead>
+                            <tr>
+                                <th>Sr.No.</th>
+                                <th>Hsn Code</th>
+                                <th>Product Name</th>
+                                <th>Gst %</th>
+                                <th>Expiry</th>
+                                <th>Quantity</th>
+                                <th>Mrp</th>
+                                <th>Purchase Price</th>
+                                <th>Batch No</th>
+                                <th>Total</th>
+                                <!--<th>Action</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of billdata; index as i">
+                                <td>{{itemsPerPage *(currentPage-1)+i+1}}</td>
+                                <td>{{product.hsn_code}}</td>
+                                <td>{{product.name}}</td>
+                                <td> {{product.gst}}</td>
+                                <td>{{product.expire_date  | date: 'dd-MM-yyyy'}}</td>
+                                <td>{{product.quantity}}</td>
+                                <td>₹ {{product.mrp}}</td>
+                                <td>₹ {{product.available_price}}</td>
+                                <td>{{product.batch_no}}</td>
+                                <td>{{product.quantity*product.available_price}}</td>
+                                <!--<td><button type="button" (click)="deleteproduct(product.sno,product.vid)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-raised" (click)="c('Close click')">Close</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card-block">
+            <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Product</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--<p>One fine body&hellip;</p>-->
+                    <input type="hidden" id="billid"  value="{{billid}}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Product Barcode </label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" (keyup)="xyz()" value="{{barcode}}" id="barcode" placeholder="Enter Barcode" autofocus class="form-control">
+                            </div>
+                        </div>
+                   </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Product Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter product name" class="form-control" value="{{name}}" id="name">
+                            </div>
+                        </div>
+                   </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Category</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <select id="projectinput5" id="cat_id"  (change)="getsubcategory($event.target.value)" class="form-control">
+                                    <option value="" selected="" disabled="">Category</option>
+                                    <option *ngFor="let category of categorydata"  value="{{category.id}}">{{category.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">SubCategory</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <select id="projectinput5" id="subcat_id"  class="form-control">
+                                    <option value="" selected="" disabled="">SubCategory</option>
+                                    <option *ngFor="let subcategory of subcategorydata" value="{{subcategory.id}}">{{ subcategory.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Mrp</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter Mrp" class="form-control" value="{{mrp}}" id="mrp">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Selling Price</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter Selling Price" class="form-control" value="{{sellingprice}}" id="selling_price">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Product Chemical Name </label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter chemical name" class="form-control" value="{{chemicalname}}" id="chemical_name">
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Expire Date</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="date" class="form-control" value="{{exdate | date : 'yyyy-MM-dd'}}" id="expiredate" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Company Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter company name" class="form-control" value="{{companyname}}" id="company_name">
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Quantity</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter quantity" class="form-control" value="{{quantity}}" id="quantity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Rack No</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter Rack no" class="form-control" value="{{rackno}}" id="rack_no" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Batch No</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter Batch no" class="form-control" value="{{batchno}}" id="batch_no">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                    <label class="display-block">Is prescription </label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <select id="is_prescription"  class="form-control">
+                                    <option value="" selected="" disabled="" >Prescription</option>
+                                    <option value="1" >Required</option>
+                                    <option value="2" >Not Required</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Hsn Code</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <select id="hsn_code"  (change)="getgst($event.target.value)" class="form-control">
+                                    <option value="" selected="" disabled="">Hsn Code</option>
+                                    <option *ngFor="let hsn of hsndata"  value="{{hsn.id}}">{{ hsn.hsn_code}}</option>
+                                </select>
+                            </div>
+                        </div>
+                   </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Gst</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Enter Gst" id="gst" value="{{gstdata}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Piece per quantity</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter total no of piece" class="form-control" value="{{perquantity}}" id="perquantity">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-raised" (click)="c('Close click')">Close</button>
+                    <button  type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createproduct()"> <i class="fa fa-check-square-o"></i>Save</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</section>
+<!-- Filter Datatable Options Ends -->

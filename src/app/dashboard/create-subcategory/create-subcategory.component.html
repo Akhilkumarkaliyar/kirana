@@ -1,0 +1,62 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="content-header">SubCategory Form</div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <form [formGroup]="SubCategoryForm"  novalidate>
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i> SubCategory Info</h4>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Category</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <select id="projectinput5" formControlName="cat_id"  class="form-control">
+                                                <option value="" selected="" disabled="">Category</option>
+                                                <option *ngFor="let category of categorydata" value="{{category.id}}">{{ category.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Sub Category Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter SubCategory name" class="form-control" formControlName="name" required name>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="SubCategoryForm.get('name').errors && (SubCategoryForm.get('name').touched || SubCategoryForm.get('name').dirty)">
+                                                <span *ngIf="SubCategoryForm.get('name').errors.required">Name is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                 </div>
+                             </div>
+
+                            <div class="form-actions center">
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Gotolist()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                                <button *ngIf="showbutton" type="submit" class="btn btn-raised btn-raised btn-primary" (click)="editsubcategory()"> <i class="fa fa-check-square-o"></i>Submit</button>
+                                <button *ngIf="!showbutton" type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createsubcategory()"> <i class="fa fa-check-square-o"></i>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

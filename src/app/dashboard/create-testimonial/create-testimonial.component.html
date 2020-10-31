@@ -1,0 +1,80 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="content-header">Testimonial Form</div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <form [formGroup]="TestimonialForm"  novalidate>
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i> Testimonial Info</h4>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Testimonial Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter Name" class="form-control" formControlName="name" required title>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="TestimonialForm.get('name').errors && (TestimonialForm.get('name').touched || TestimonialForm.get('name').dirty)">
+                                                <span *ngIf="TestimonialForm.get('name').errors.required">Title is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Testimonial Description</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <ck-editor  skin="moono-lisa" language="en" *ngIf="descen.description"
+                                             formControlName="description"></ck-editor>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="TestimonialForm.get('description').errors && (TestimonialForm.get('description').touched || TestimonialForm.get('description').dirty)">
+                                                <span *ngIf="TestimonialForm.get('description').errors.required">Description is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Testimonial Image</label>
+                                        </div>
+                                    </div>
+                                   <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="file" style="display:none" (change)="filechange($event)" #fileinput  class="form-control-file" image>
+                                            <button class="btn btn-raised btn-primary mr-2" (click)="fileinput.click()">select Image</button>
+                                            <span>{{name}}</span>
+                                            <span></span>
+                                            <span>{{descen.image}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions center">
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Gotolist()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                                <button *ngIf="showbutton" type="submit" class="btn btn-raised btn-raised btn-primary" (click)="edittestimonialdata()"> <i class="fa fa-check-square-o"></i>Submit</button>
+                                <button *ngIf="!showbutton" type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createtestimonialdata()"> <i class="fa fa-check-square-o"></i>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

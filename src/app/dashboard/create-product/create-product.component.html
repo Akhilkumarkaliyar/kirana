@@ -1,0 +1,248 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="content-header">Product Form</div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <form [formGroup]="ProductForm"  novalidate>
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i> Product Info</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Product Barcode </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" (click)="xyz()" id="barcode" placeholder="Enter Barcode" autofocus value={{barcodeValue}} class="form-control" formControlName="barcode">
+                                               <!--<span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('barcode').errors && (ProductForm.get('barcode').touched || ProductForm.get('barcode').dirty)">
+                                                    <span *ngIf="ProductForm.get('barcode').errors.required">Barcode is required</span>
+                                                </span>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Product Name <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter product name" class="form-control" formControlName="name" required name>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('name').errors && (ProductForm.get('name').touched || ProductForm.get('name').dirty)">
+                                                    <span *ngIf="ProductForm.get('name').errors.required">Name is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Type <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <select id="projectinput5" formControlName="cat_id"  (changess)="getsubcategory($event.target.value)" class="form-control">
+                                                    <option value="" selected="" disabled="">Select Type</option>
+                                                    <option *ngFor="let category of categorydata"  value="{{category.name}}">{{ category.name}}</option>
+                                                </select>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('cat_id').errors && (ProductForm.get('cat_id').touched || ProductForm.get('cat_id').dirty)">
+                                                    <span *ngIf="ProductForm.get('cat_id').errors.required">Category required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Discount % </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter Discount Percentage" class="form-control" formControlName="discount" >
+                                                <!--<span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('discount').errors && (ProductForm.get('discount').touched || ProductForm.get('discount').dirty)">
+                                                    <span *ngIf="ProductForm.get('discount').errors.required">Discount is required</span>
+                                                </span>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Company Name </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter company name" class="form-control" formControlName="company_name" >
+                                                <!--<span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('company_name').errors && (ProductForm.get('company_name').touched || ProductForm.get('company_name').dirty)">
+                                                    <span *ngIf="ProductForm.get('company_name').errors.required">Company name is required</span>
+                                                </span>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Mrp <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter Mrp" class="form-control" formControlName="mrp" required mrp>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('mrp').errors && (ProductForm.get('mrp').touched || ProductForm.get('mrp').dirty)">
+                                                    <span *ngIf="ProductForm.get('mrp').errors.required">Mrp is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Pack <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter quantity" class="form-control" formControlName="quantity" required quantity>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('quantity').errors && (ProductForm.get('quantity').touched || ProductForm.get('quantity').dirty)">
+                                                    <span *ngIf="ProductForm.get('quantity').errors.required">Quantity is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Loose </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter Loose Quantity" class="form-control" formControlName="loose" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Rack No </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter Rack no" class="form-control" formControlName="rack_no" >
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('rack_no').errors && (ProductForm.get('rack_no').touched || ProductForm.get('rack_no').dirty)">
+                                                    <span *ngIf="ProductForm.get('rack_no').errors.required">Rack No is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Piece per Pack</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter total no of piece" class="form-control" formControlName="perquantity">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Batch No <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter Batch no" class="form-control" formControlName="batch_no" required batch_no>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('batch_no').errors && (ProductForm.get('batch_no').touched || ProductForm.get('batch_no').dirty)">
+                                                    <span *ngIf="ProductForm.get('batch_no').errors.required">Batch No is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Hsn Code</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter Hsn Code" class="form-control" formControlName="hsn_code" hsn_code>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Gst % <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <!--<input type="text" class="form-control" placeholder="Enter Gst" id="gst" value="{{gst}}">-->
+                                                <select id="" formControlName="gst"  class="form-control">
+                                                    <option value="" selected="" disabled="" >Gst</option>
+                                                    <option value="5" >5</option>
+                                                    <option value="12" >12</option>
+                                                    <option value="18" >18</option>
+                                                </select>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('gst').errors && (ProductForm.get('gst').touched || ProductForm.get('gst').dirty)">
+                                                    <span *ngIf="ProductForm.get('gst').errors.required">Gst required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions center">
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Gotolist()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                                <button *ngIf="showbutton" type="submit" class="btn btn-raised btn-raised btn-primary" (click)="editproduct()"> <i class="fa fa-check-square-o"></i>Submit</button>
+                                <button *ngIf="!showbutton" type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createproduct()"> <i class="fa fa-check-square-o"></i>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

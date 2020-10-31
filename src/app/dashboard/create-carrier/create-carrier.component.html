@@ -1,0 +1,63 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="content-header">Carrier Form</div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <form [formGroup]="CarrierForm"  novalidate>
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i>Carrier Info</h4>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Carrier Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter Carrier name" class="form-control" formControlName="name" required name>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="CarrierForm.get('name').errors && (CarrierForm.get('name').touched || CarrierForm.get('name').dirty)">
+                                                <span *ngIf="CarrierForm.get('name').errors.required">Name is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Last Date To Apply</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter Last Date" class="form-control" formControlName="last_date" required last_date>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="CarrierForm.get('last_date').errors && (CarrierForm.get('last_date').touched || CarrierForm.get('last_date').dirty)">
+                                                <span *ngIf="CarrierForm.get('last_date').errors.required">Last date is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                 </div>
+                             </div>
+
+                            <div class="form-actions center">
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Gotolist()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                                <button *ngIf="showbutton" type="submit" class="btn btn-raised btn-raised btn-primary" (click)="editcarrierForm()"> <i class="fa fa-check-square-o"></i>Submit</button>
+                                <button *ngIf="!showbutton" type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createcarrierForm()"> <i class="fa fa-check-square-o"></i>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,92 @@
+<!-- Filter Datatable Options Starts -->
+<section id="extended">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="row akhil">
+                            <div class="col-lg-4">
+                                <form [formGroup]="ProductSearch"  novalidate>
+                                    <div class="input-group">
+                                        <div class="col-lg-12">
+                                            <input type="text" placeholder="Search by name" (keyup)="getsalesreport()" class="form-control" formControlName="search" required search>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="ProductSearch.get('search').errors && (ProductSearch.get('search').touched || ProductSearch.get('search').dirty)">
+                                                <span *ngIf="ProductSearch.get('search').errors.required">Enter some value</span>
+                                            </span>  
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <select id="projectinput5" class="form-control" id="getpage" (change)="getrecord()">
+                                        <option value="10"  selected>10</option>
+                                        <option value="1000">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <a class="btn btn-raised mr-1 btn-primary" (click)="exportAsXLSX()">Download List</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Customer Sales Report</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-left">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Invoice No</th>
+                                    <th>Customer Name</th>
+                                    <th>Invoice date</th>
+                                    <th>Mobile</th>
+                                    <th>Address</th>
+                                    <th>Total Purchase</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of TodaySolddata; index as i">
+                                    <td>{{itemsPerPage *(currentPage-1)+i+1}}</td>
+                                    <td>{{product.invoiceno}}</td>
+                                    <td>
+                                        <a class="success p-0" download data-original-title="" title="" (click)="goToviewdetail(product.id)">
+                                            {{product.name}}
+                                        </a>
+                                    </td>
+                                    <td>{{product.invoicedate  | date: 'dd-MM-yyyy'}}</td>
+                                    <td>{{product.mobile}}</td>
+                                    <td>{{product.address}}</td>
+                                    <td>{{product.totalpur}}</td>
+                                    <td>
+                                        <a class="success p-0" download data-original-title="" title="" (click)="goToviewdetail(product.bill_no)">
+                                            Detail
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="totalRecords !== ''">
+                    <div class="card-block">
+                        <ngb-pagination (pageChange)="handleChange($event)" [collectionSize]="totalRecords" [(page)]="initialPageValue" [maxSize]="5" [rotate]="true" [pageSize]="10" [boundaryLinks]="true"></ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Filter Datatable Options Ends -->

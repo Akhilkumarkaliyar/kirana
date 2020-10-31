@@ -1,0 +1,99 @@
+<!-- Filter Datatable Options Starts -->
+<section id="extended">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="row akhil">
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-raised mr-1 btn-primary" (click)="goToaddwholesaler(':id')">Add Vendor</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <form [formGroup]="WholesalerSearch"  novalidate>
+                                    <div class="row">
+                                        <div clss="col-lg-12">
+                                            <input type="text" placeholder="Search Vendor" (keyup)="getwholesalername()" class="form-control" formControlName="search" required search>
+                                        </div>
+                                        <div clss="col-lg-12">
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="WholesalerSearch.get('search').errors && (WholesalerSearch.get('search').touched || WholesalerSearch.get('search').dirty)">
+                                                <span *ngIf="WholesalerSearch.get('search').errors.required">Enter some value</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <select id="projectinput5" class="form-control" id="getpage" (change)="getrecord()">
+                                        <option value="10"  selected>10</option>
+                                        <option value="1000">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <a class="btn btn-raised mr-1 btn-primary" (click)="exportAsXLSX()">Download List</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Vendor List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-left">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Vendor Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Address</th>
+                                    <th>Gst No</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of wholesaler; index as i">
+                                    <td>{{itemsPerPage *(currentPage-1)+i+1}}</td>
+                                    <td>{{product.name}}</td>
+                                    <td>{{product.email}}</td>
+                                    <td>{{product.mobile}}</td>
+                                    <td>{{product.address}}</td>
+                                    <td>{{product.gstno}}</td>
+                                    <td>
+                                        <!--<a class="btn btn-raised gradient-purple-bliss white shadow-z-1-hover" data-original-title="" title="" (click)="addbilling(product.id)">
+                                            <i class="ft-plus font-medium-3 mr-2"></i>Add Billing
+                                        </a>-->
+                                        <a class="success p-0" data-original-title="" title="" (click)="goToCreatewholesaler(product.id)">
+                                            <i class="ft-edit-2 font-medium-3 mr-2"></i>Edit
+                                        </a>
+                                        <!--<a class="danger p-0" data-original-title="" title="">
+                                            <i class="ft-x font-medium-3 mr-2"></i>
+                                        </a>-->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="totalRecords !== ''">
+                    <div class="card-block">
+                        <ngb-pagination (pageChange)="handleChange($event)" [collectionSize]="totalRecords" [(page)]="initialPageValue" [maxSize]="5" [rotate]="true" [pageSize]="10" [boundaryLinks]="true"></ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Filter Datatable Options Ends -->

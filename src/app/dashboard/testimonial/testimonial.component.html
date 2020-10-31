@@ -1,0 +1,48 @@
+<!-- Filter Datatable Options Starts -->
+<section id="extended">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-raised mr-1 btn-primary" (click)="goToCreatedata(':id')">Add Testimonial Data</button>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Testimonial Data List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-left">
+                            <thead>
+                                <tr>
+                                    <th>Sr. No.</th>
+                                    <th>Name</th>
+                                     <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of Testimonialdata; index as i">
+                                    <td>{{i+1}}</td>
+                                    <td>{{data.name }}</td>
+                                    <td><span [innerHTML]="data.description"></span></td>
+                                    <td>
+                                        <!--<a class="info p-0" data-original-title="" title="">
+                                            <i class="ft-user font-medium-3 mr-2"></i>
+                                        </a>-->
+                                        <a class="success p-0" data-original-title="" title="" (click)="goToCreatedata(data.id)">
+                                            <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                                        </a>
+                                        <a class="danger p-0" data-original-title="" title="" (click)="deleteTestimonialdata(data.id)">
+                                            <i class="ft-x font-medium-3 mr-2"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Filter Datatable Options Ends -->

@@ -1,0 +1,241 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="content-header">Vendor Bill Form</div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <form [formGroup]="VendorbillForm"  novalidate>
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i> Vendor Bill Info</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Vendor Name <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <select id="projectinput5" (changes)="open(content)" formControlName="vendor_id" class="form-control">
+                                                    <option value="" selected="" disabled="">Vendor Name</option>
+                                                    <option *ngFor="let vendor of vendordata"  value="{{vendor.id}}">{{ vendor.name}}</option>
+                                                </select>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="VendorbillForm.get('vendor_id').errors && (VendorbillForm.get('vendor_id').touched || VendorbillForm.get('vendor_id').dirty)">
+                                                    <span *ngIf="VendorbillForm.get('vendor_id').errors.required">Vendor Name required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Bill No <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter Bill No" class="form-control" formControlName="bill_no" required>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="VendorbillForm.get('bill_no').errors && (VendorbillForm.get('bill_no').touched || VendorbillForm.get('bill_no').dirty)">
+                                                    <span *ngIf="VendorbillForm.get('bill_no').errors.required">Bill no is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Search Product</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text"  list="browsers" id="searchproduct" placeholder="Search product" (keyup)="getProduct()" (change)="open(content,$event.target.value)"   class="form-control" value="{{searchvalue}}" >
+                                                <datalist id="browsers" *ngIf="productdata !== ''">
+                                                    <option *ngFor="let product of productdata" value="{{product.name}}">
+                                                </datalist>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Bill Amount <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter Bill Amount" class="form-control" id="amount" value="{{amount}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Bill Date <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="date" class="form-control" value="{{billdate | date : 'yyyy-MM-dd'}}" id="bill_date" >
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="VendorbillForm.get('bill_date').errors && (VendorbillForm.get('bill_date').touched || VendorbillForm.get('bill_date').dirty)">
+                                                    <span *ngIf="VendorbillForm.get('bill_date').errors.required">Bill date is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Bill Amount <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter Bill Amount" class="form-control" formControlName="amount" required>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="VendorbillForm.get('amount').errors && (VendorbillForm.get('amount').touched || VendorbillForm.get('amount').dirty)">
+                                                    <span *ngIf="VendorbillForm.get('amount').errors.required">Bill amount is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                            <div class="modal-body">
+                                <!--<p>One fine body&hellip;</p>-->
+                                <table class="table table-responsive-md text-left">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr.No.</th>
+                                            <th>Product Name</th>
+                                            <th>Gst %</th>
+                                            <!--<th>Expiry</th>-->
+                                            <th>Quantity</th>
+                                            <th>₹ Purchase Price</th>
+                                            <th>₹ Mrp</th>
+                                            <th>Batch No</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let product of billdata; index as i">
+                                            <td>{{i}}</td>
+                                            <td>{{product.name}}</td>
+                                            <td>{{product.gst}}</td>
+                                           <!--<td>{{product.expire_date  | date: 'dd-MM-yyyy'}}</td>-->
+                                            <td>{{product.quantity}}</td>
+                                            <td>{{product.available_price}}</td>
+                                            <td>{{product.mrp}}</td>
+                                            <td>{{product.batch_no}}</td>
+                                            <td>{{product.quantity*product.available_price}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-actions center">
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Gotolist()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                                <button *ngIf="showbutton" type="submit" class="btn btn-raised btn-raised btn-primary" (click)="editvendorbill()"> <i class="fa fa-check-square-o"></i>Submit</button>
+                                <button *ngIf="!showbutton" type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createvendorbill()"> <i class="fa fa-check-square-o"></i>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card-block">
+            <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title">Product List</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--<p>One fine body&hellip;</p>-->
+                    <input type="hidden" id="productid"  value="{{productid}}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Purchase Price</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter Amount" class="form-control" value="{{purchaseprice}}" id="purchaseprice">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Mrp</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter Mrp" class="form-control" value="{{mrp}}" id="mrp">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Expire Date</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="date" class="form-control" value="{{exdate | date : 'yyyy-MM-dd'}}" id="expiredate" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Quantity</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter quantity" class="form-control" value="{{quantity}}" id="quantity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="projectinput1">Batch No</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter Batch no" class="form-control" value="{{batchno}}" id="batchno">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button  type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createvendorproduct()"> <i class="fa fa-check-square-o"></i>Save</button>
+                    <button type="button" class="btn btn-secondary btn-raised" (click)="c('Close click')">Close</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</section>

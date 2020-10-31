@@ -1,0 +1,121 @@
+<!--Statistics cards Starts-->
+<div class="row">
+	<div class="col-xl-3 col-lg-6 col-md-6 col-12">
+		<div class="card gradient-blackberry">
+			<div class="card-body">
+				<div class="card-block pt-2 pb-0">
+					<div class="media">
+						<div class="media-body white text-left">
+							<h3 class="font-large-1 mb-0">{{Total}}</h3>
+							<span>Total Product</span>
+						</div>
+						<div class="media-right white text-right">
+							<i class="icon-pie-chart font-large-1"></i>
+						</div>
+					</div>
+				</div>
+				<div id="Widget-line-chart" class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
+					<x-chartist class="" [data]="WidgetlineChart.data" [type]="WidgetlineChart.type" [options]="WidgetlineChart.options" [responsiveOptions]="WidgetlineChart.responsiveOptions"
+					 [events]="WidgetlineChart.events">
+					</x-chartist>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-lg-6 col-md-6 col-12">
+		<div class="card gradient-ibiza-sunset">
+			<div class="card-body">
+				<div class="card-block pt-2 pb-0">
+					<div class="media">
+						<div class="media-body white text-left">
+							<h3 class="font-large-1 mb-0">{{Available}}</h3>
+							<span>Available Product</span>
+						</div>
+						<div class="media-right white text-right">
+							<i class="icon-bulb font-large-1"></i>
+						</div>
+					</div>
+				</div>
+				<div id="Widget-line-chart" class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
+					<x-chartist class="" [data]="WidgetlineChart.data" [type]="WidgetlineChart.type" [options]="WidgetlineChart.options" [responsiveOptions]="WidgetlineChart.responsiveOptions"
+					 [events]="WidgetlineChart.events">
+					</x-chartist>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-xl-3 col-lg-6 col-md-6 col-12">
+		<div class="card gradient-green-tea">
+			<div class="card-body">
+				<div class="card-block pt-2 pb-0">
+					<div class="media">
+						<div class="media-body white text-left">
+							<h3 class="font-large-1 mb-0">₹ {{Month}}</h3>
+							<span>This Month Sales</span>
+						</div>
+						<div class="media-right white text-right">
+							<i class="icon-graph font-large-1"></i>
+						</div>
+					</div>
+				</div>
+				<div id="Widget-line-chart" class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
+					<x-chartist class="" [data]="WidgetlineChart.data" [type]="WidgetlineChart.type" [options]="WidgetlineChart.options" [responsiveOptions]="WidgetlineChart.responsiveOptions"
+					 [events]="WidgetlineChart.events">
+					</x-chartist>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-lg-6 col-md-6 col-12">
+		<div class="card gradient-pomegranate">
+			<div class="card-body">
+				<div class="card-block pt-2 pb-0">
+					<div class="media">
+						<div class="media-body white text-left">
+							<h3 class="font-large-1 mb-0">₹ {{Price}}</h3>
+							<span>Total Earning</span>
+						</div>
+						<div class="media-right white text-right">
+							<i class="icon-wallet font-large-1"></i>
+						</div>
+					</div>
+				</div>
+				<div id="Widget-line-chart" class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
+					<x-chartist class="" [data]="WidgetlineChart.data" [type]="WidgetlineChart.type" [options]="WidgetlineChart.options" [responsiveOptions]="WidgetlineChart.responsiveOptions"
+					 [events]="WidgetlineChart.events">
+					</x-chartist>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Statistics cards Ends-->
+
+<!--Line with Area Chart 1 Starts-->
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">PRODUCTS SALES</h4>
+			</div>
+			<div class="card-body">
+				<div class="card-block">
+					<div class="chart-info mb-3 ml-3">
+						<span class="gradient-blackberry d-inline-block rounded-circle mr-1" style="width:15px; height:15px;"></span> Sales
+						<span class="gradient-mint d-inline-block rounded-circle mr-1 ml-2" style="width:15px; height:15px;"></span> Visits
+					</div>
+					<div id="line-area" class="height-350 lineArea">
+						<x-chartist [data]="lineArea.data" [type]="lineArea.type" [options]="lineArea.options"
+						 [responsiveOptions]="lineArea.responsiveOptions" [events]="lineArea.events">
+						</x-chartist>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Line with Area Chart 1 Ends-->
+
+

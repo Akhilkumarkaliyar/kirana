@@ -1,0 +1,78 @@
+<!-- Filter Datatable Options Starts -->
+<section id="extended">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="row akhil">
+                            <div class="col-lg-4">
+                            </div>
+                            <div class="col-lg-4">
+                                <form [formGroup]="SaleproductSearch"  novalidate>
+                                    <div class="row">
+                                        <div clss="col-lg-12">
+                                            <input type="text" placeholder="Search Payment" (keyup)="getsalesearch()" class="form-control" formControlName="search" required>
+                                        </div>
+                                        <div clss="col-lg-12">
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="SaleproductSearch.get('search').errors && (SaleproductSearch.get('search').touched || SaleproductSearch.get('search').dirty)">
+                                                <span *ngIf="SaleproductSearch.get('search').errors.required">Enter some value</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <a class="btn btn-raised mr-1 btn-primary" (click)="exportAsXLSX()">Download List</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Sold Product List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-left">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Category Name</th>
+                                    <th>SubCategory Name</th>
+                                    <th>Product Name</th>
+                                    <th>Chemical Name</th>
+                                    <th>Company Name</th>
+                                    <th>Quantity</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of Soldproductdata; index as i">
+                                    <td>{{itemsPerPage *(currentPage-1)+i+1}}</td>
+                                    <td>{{product.cname}}</td>
+                                    <td>{{product.scname}}</td>
+                                    <td>{{product.name}}</td>
+                                    <td>{{product.chemical_name}}</td>
+                                    <td>{{product.company_name}}</td>
+                                    <td>{{product.quantity}}</td>
+                                    <td>{{product.amount}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="totalRecords !== ''">
+                    <div class="card-block">
+                        <ngb-pagination (pageChange)="handleChange($event)" [collectionSize]="totalRecords" [(page)]="initialPageValue" [maxSize]="5" [rotate]="true" [pageSize]="10" [boundaryLinks]="true"></ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Filter Datatable Options Ends -->

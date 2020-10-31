@@ -1,0 +1,97 @@
+<!-- Filter Datatable Options Starts -->
+<section id="extended">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="row akhil">
+                            <div class="col-lg-3">
+                                <form [formGroup]="ProductSearch"  novalidate>
+                                    <div class="input-group">
+                                        <div class="col-lg-12">
+                                            <input type="text" placeholder="Search product name" (keyup)="getproductname()" class="form-control" formControlName="search" required search>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="ProductSearch.get('search').errors && (ProductSearch.get('search').touched || ProductSearch.get('search').dirty)">
+                                                <span *ngIf="ProductSearch.get('search').errors.required">Enter some value</span>
+                                            </span>  
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <select id="projectinput5" class="form-control" id="getpage" (change)="getrecord()">
+                                        <option value="10"  selected>10</option>
+                                        <option value="10000">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <select id="projectinput5" class="form-control" id="getsortpage" (change)="getsortrecord()">
+                                        <option value="name"  selected>Name</option>
+                                        <!--<option value="expire_date">Expire date</option>-->
+                                        <option value="cat_id">Type</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <a class="btn btn-raised mr-1 btn-primary" (click)="exportAsXLSX()">Download List</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Stock List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-left">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Type</th>
+                                    <!--<th>SubCategory Name</th>-->
+                                    <th>Product Name</th>
+                                    <th>Discount</th>
+                                    <th>Selling Price</th>
+                                    <th>Mrp</th>
+                                    <th>Gst</th>
+                                    <th>Batch No</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of comingproductdata; index as i">
+                                    <td [ngClass]="{'maincolor':product.quantity > 0 }">{{itemsPerPage *(currentPage-1)+i+1}}</td>
+                                    <td [ngClass]="{'maincolor':product.quantity > 0 }">{{product.cname}}</td>
+                                    <!--<td [ngClass]="{'maincolor':product.quantity > 0 }">{{product.scname}}</td>-->
+                                    <td [ngClass]="{'maincolor':product.quantity > 0 }">{{product.name}}</td>
+                                    <td [ngClass]="{'maincolor':product.quantity > 0 }">{{product.discount}}</td>
+                                    <td [ngClass]="{'maincolor':product.quantity > 0 }">₹ {{product.selling_price}}</td>
+                                    <td [ngClass]="{'maincolor':product.quantity > 0 }">₹ {{product.mrp}}</td>
+                                    <td [ngClass]="{'maincolor':product.quantity > 0 }"> {{product.gst}} %</td>
+                                    <td [ngClass]="{'maincolor':product.quantity > 0 }">{{product.batch_no}}</td>
+                                    <td [ngClass]="{'maincolor':product.quantity > 0 }">{{product.quantity}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="totalRecords !== ''">
+                    <div class="card-block">
+                        <ngb-pagination (pageChange)="handleChange($event)" [collectionSize]="totalRecords" [(page)]="initialPageValue" [maxSize]="5" [rotate]="true" [pageSize]="10" [boundaryLinks]="true"></ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Filter Datatable Options Ends -->

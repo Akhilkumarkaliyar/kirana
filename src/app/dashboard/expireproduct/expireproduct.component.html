@@ -1,0 +1,73 @@
+<!-- Filter Datatable Options Starts -->
+<section id="extended">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="row akhil">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <select id="projectinput5" class="form-control" id="getpage" (change)="getrecord()">
+                                        <option value="10"  selected>10</option>
+                                        <option value="10000">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <a class="btn btn-raised mr-1 btn-primary" (click)="exportAsXLSX()">Download List</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Expire Product Report</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-left">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Type</th>
+                                    <!--<th>SubCategory Name</th>-->
+                                    <th>Product Name</th>
+                                    <th>Chemical Name</th>
+                                    <th>Mrp</th>
+                                    <th>Selling Price</th>
+                                    <th>Company Name</th>
+                                    <th>Quantity</th>
+                                 </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of Expireproductdata; index as i">
+                                    <td>{{itemsPerPage *(currentPage-1)+i+1}}</td>
+                                    <td>{{product.cname}}</td>
+                                    <!--<td>{{product.scname}}</td>-->
+                                    <td>{{product.name}}</td>
+                                    <td>{{product.chemical_name}}</td>
+                                    <td>{{product.mrp}}</td>
+                                    <td>{{product.selling_price}}</td>
+                                    <td>{{product.company_name}}</td>
+                                    <td>{{product.quantity}}</td>
+                               </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="totalRecords !== ''">
+                    <div class="card-block">
+                        <ngb-pagination (pageChange)="handleChange($event)" [collectionSize]="totalRecords" [(page)]="initialPageValue" [maxSize]="5" [rotate]="true" [pageSize]="10" [boundaryLinks]="true"></ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Filter Datatable Options Ends -->

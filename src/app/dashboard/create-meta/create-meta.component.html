@@ -1,0 +1,79 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="content-header">Meta Tag Form</div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <form [formGroup]="MetaForm"  novalidate>
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i> Meta Tag Info</h4>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Meta Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter Name" class="form-control" formControlName="name" required name>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="MetaForm.get('name').errors && (MetaForm.get('name').touched || MetaForm.get('name').dirty)">
+                                                <span *ngIf="MetaForm.get('name').errors.required">Name is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Meta Title</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter title" class="form-control" formControlName="title" required title>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="MetaForm.get('title').errors && (MetaForm.get('title').touched || MetaForm.get('title').dirty)">
+                                                <span *ngIf="MetaForm.get('title').errors.required">Title is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Meta Description</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <ck-editor  skin="moono-lisa" language="en" formControlName="description"></ck-editor>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="MetaForm.get('description').errors && (MetaForm.get('description').touched || MetaForm.get('description').dirty)">
+                                                <span *ngIf="MetaForm.get('description').errors.required">Description is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions center">
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Gotolist()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                                <button *ngIf="showbutton" type="submit" class="btn btn-raised btn-raised btn-primary" (click)="editmetadata()"> <i class="fa fa-check-square-o"></i>Submit</button>
+                                <button *ngIf="!showbutton" type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createmetadata()"> <i class="fa fa-check-square-o"></i>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

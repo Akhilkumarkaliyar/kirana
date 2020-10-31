@@ -1,0 +1,51 @@
+<!--Login Page Starts-->
+<section id="login">
+    <div class="container-fluid">
+        <div class="row full-height-vh">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <div class="card gradient-indigo-purple text-center width-400">
+                    <div class="card-img overlap">
+                       <!-- <img alt="element 06" class="mb-1" src="assets/img/portrait/avatars/avatar-08.png" width="190">-->
+                    </div>
+                    <div class="card-body" style="background-image: linear-gradient(45deg, #303f9f, #7b1fa2);padding-top: 15px;">
+                        <div class="card-block">
+                            <h2 class="white">Login</h2>
+                            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+                                <div class="form-group" [ngClass]="{'has-error': loginForm.get('email').errors}">
+                                    <div class="col-md-12">
+                                        <input type="email" class="form-control" formControlName="email"
+                                            placeholder="Email" required email>
+                                        <span class="form-text text-muted danger"
+                                            *ngIf="loginForm.get('email').errors && (loginForm.get('email').touched || loginForm.get('email').dirty)">
+                                            <span *ngIf="loginForm.get('email').errors.required">Email is required</span>
+                                            <span *ngIf="loginForm.get('email').errors.email">Invalid Email ID</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group" [ngClass]="{'has-error': loginForm.get('password').errors}">
+                                    <div class="col-md-12">
+                                        <input type="password" class="form-control" formControlName="password"
+                                            placeholder="Password" required>
+                                        <span class="form-text text-muted danger"
+                                            *ngIf="loginForm.get('password').errors && (loginForm.get('password').touched || loginForm.get('password').dirty)">
+                                            <span *ngIf="loginForm.get('password').errors.required">Password is
+                                                required</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <span *ngIf="showErrorMsg" style="color: red">{{showErrorMsg}}</span>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <button type="submit" [disabled]="!loginForm.valid"
+                                            class="btn btn-pink btn-block btn-raised">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Login Page Ends-->

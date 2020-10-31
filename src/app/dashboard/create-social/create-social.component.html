@@ -1,0 +1,79 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="content-header">Social Form</div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <form [formGroup]="SocialForm"  novalidate>
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i> Social Info</h4>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Social Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter name" class="form-control" formControlName="name" required name>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="SocialForm.get('name').errors && (SocialForm.get('name').touched || SocialForm.get('name').dirty)">
+                                                <span *ngIf="SocialForm.get('name').errors.required">Name is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Social Link</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter Link" class="form-control" formControlName="link" required link>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="SocialForm.get('link').errors && (SocialForm.get('link').touched || SocialForm.get('link').dirty)">
+                                                <span *ngIf="SocialForm.get('link').errors.required">Link is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Social Image</label>
+                                        </div>
+                                    </div>
+                                   <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="file" style="display:none" (change)="filechange($event)" #fileinput  class="form-control-file" image>
+                                            <button class="btn btn-raised btn-primary mr-2" (click)="fileinput.click()">select Image</button>
+                                            <span>{{name}}</span>
+                                            <span></span>
+                                            <span>{{descen.image}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions center">
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Gotolist()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                                <button *ngIf="showbutton" type="submit" class="btn btn-raised btn-raised btn-primary" (click)="editsocialdata()"> <i class="fa fa-check-square-o"></i>Submit</button>
+                                <button *ngIf="!showbutton" type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createsocialdata()"> <i class="fa fa-check-square-o"></i>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

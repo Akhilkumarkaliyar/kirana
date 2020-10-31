@@ -1,0 +1,210 @@
+<!--Invoice template starts-->
+<div class="row">
+    <div class="col-md-12">
+        <h4>Invoice</h4>
+    </div>
+</div>
+<section class="invoice-template">
+    <div class="card">
+        <div class="card-body p-3">
+            <div id="invoice-template" class="card-block">
+                <!-- Invoice Company Details -->
+                <div id="invoice-company-details" class="row">
+                    <div class="col-6 text-left">
+                        <h2>INVOICE</h2>
+                    </div>
+                    <div class="col-6 text-right">
+                        <p><span class="text-muted">Invoice Date :</span> {{myDate | date:'dd/MM/yyyy'}}</p>
+                        <p><span class="text-muted">Invoice No :</span> # INV-001001</p>
+                    </div>
+                </div>
+                <!-- Invoice Company Details -->
+                <!--User Detail-->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="px-3">
+                                    <form [formGroup]="ProductSearch"  novalidate>
+                                        <div class="form-body">
+                                            <h6 class="form-section">Search Product</h6>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="input-group">
+                                                        <div class="col-lg-12">
+                                                            <input type="text" (keyup)="getproductname()" placeholder="Search product" class="form-control" formControlName="search" required>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <span class="form-text text-muted danger"
+                                                                *ngIf="ProductSearch.get('search').errors && (ProductSearch.get('search').touched || ProductSearch.get('search').dirty)">
+                                                                <span *ngIf="ProductSearch.get('search').errors.required">Enter some value</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="px-3 ">
+                                   
+                                    <div class="form-body">
+                                        <h6 class="form-section">Retailer Info</h6>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="projectinput1">Select Wholesaler </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <select id="projectinput5"  (change)="getwhole($event.target.value)" class="form-control">
+                                                        <option value="" selected="" disabled="">Wholesailer</option>
+                                                        <option *ngFor="let whole of Wholesailer"  value="{{whole.id}}">{{ whole.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" >
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label for="">Name : </label>
+                                                    </div>
+                                                    <div class="col-md-12" *ngIf="sailerdetail">
+                                                        <label for="">{{wholeiddata.name}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label for="">Mobile No : </label>
+                                                    </div>
+                                                    <div class="col-md-12" *ngIf="sailerdetail">
+                                                        <label for="">{{wholeiddata.mobile}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label>Email : </label>
+                                                    </div>
+                                                    <div class="col-md-12" *ngIf="sailerdetail">
+                                                            <label>{{wholeiddata.email}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label>Address : </label>
+                                                    </div>
+                                                    <div class="col-md-12" *ngIf="sailerdetail">
+                                                        <label>{{wholeiddata.address}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!--User Detail-->
+                <!-- Invoice Items Details -->
+                <div id="invoice-items-details" class="pt-2">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 text-left">
+                            <div class="table-responsive col-sm-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>S.NO</th>
+                                            <th>Medicine</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of productdata; index as i">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>
+                                                <a (click)="autoorder(data.id)">
+                                                    <p>{{data.name}}</p>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <span></span>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 text-left vl">
+                            <div class="table-responsive col-sm-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>S.NO</th>
+                                            <th>Medicine</th>
+                                            <th>Quantity</th>
+                                            <th>Batch no</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of Billingdata; index as i">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>
+                                                <p>{{data.name}}</p>
+                                            </td>
+                                            <td>
+                                                {{data.quantity}}
+                                                <div class="btn-group ml-1">
+                                                    <a class="btn btn-info btn-raised" href="javascript:void(0)" (click)="discrequantity(data.id,data.product_id)">-</a>
+                                                    <a class="btn btn-info btn-raised" href="javascript:void(0)" (click)="increquantity(data.id,data.product_id)">+</a>
+                                                </div>
+                                            </td>
+                                            <td> {{data.batch_no}}</td>
+                                            <td>
+                                                <a class="danger" data-original-title="" title="" (click)="deletebillingdata(data.ids)">
+                                                    <i class="ft-trash font-medium-3"></i>Delete
+                                                 </a>
+                                            </td>
+                                        </tr>
+                                        <span></span>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Invoice Footer -->
+                    <div id="invoice-footer">
+                        <div class="row">
+                            <!--<div class="col-md-9 col-sm-12">
+                                <h6>Terms &amp; Condition</h6>
+                                <p>You know, being a test pilot isn't always the healthiest business in the world. We predict too
+                                    much for the next year and yet far too little for the next 10.</p>
+                            </div>-->
+                            <div class="col-md-12 col-sm-12 text-center">
+                                <button type="button" class="btn btn-primary btn-raised my-1" (click)="placeorder(wholeiddata.id)"><i class="fa fa-paper-plane-o"></i> Place Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ Invoice Footer -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Invoice template ends-->

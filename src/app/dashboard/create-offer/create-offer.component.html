@@ -1,0 +1,79 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="content-header">Offer Form</div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <form [formGroup]="OfferForm"  novalidate>
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i>Offer Info</h4>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Offer name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter Name" class="form-control" formControlName="name" required name>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="OfferForm.get('name').errors && (OfferForm.get('name').touched || OfferForm.get('name').dirty)">
+                                                <span *ngIf="OfferForm.get('name').errors.required">Name is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Offer Description</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <ck-editor  skin="moono-lisa" language="en"  formControlName="description"></ck-editor>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="OfferForm.get('description').errors && (OfferForm.get('description').touched || OfferForm.get('description').dirty)">
+                                                <span *ngIf="OfferForm.get('description').errors.required">Description is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Offer Image</label>
+                                        </div>
+                                    </div>
+                                   <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="file" style="display:none" (change)="filechange($event)" #fileinput  class="form-control-file" image>
+                                            <button class="btn btn-raised btn-primary mr-2" (click)="fileinput.click()">select Image</button>
+                                            <span>{{name}}</span>
+                                            <span></span>
+                                            <!--<span>{{descen.image}}</span>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions center">
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Gotolist()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                                <button *ngIf="showbutton" type="submit" class="btn btn-raised btn-raised btn-primary" (click)="editofferdata()"> <i class="fa fa-check-square-o"></i>Submit</button>
+                                <button *ngIf="!showbutton" type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createofferdata()"> <i class="fa fa-check-square-o"></i>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,144 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="content-header">Pharmacy Form</div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <form [formGroup]="ContactForm"  novalidate>
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i>Pharmacy Info</h4>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Pharmacy Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter pharmacy name" class="form-control" formControlName="name" required name>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="ContactForm.get('name').errors && (ContactForm.get('name').touched || ContactForm.get('name').dirty)">
+                                                <span *ngIf="ContactForm.get('name').errors.required">Name is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Pharmacy Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter email" class="form-control" formControlName="email" required email>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="ContactForm.get('email').errors && (ContactForm.get('email').touched || ContactForm.get('email').dirty)">
+                                                <span *ngIf="ContactForm.get('email').errors.required">Email is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Pharmacy Mobile</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter mobile no" class="form-control" formControlName="mobile" required mobile>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="ContactForm.get('mobile').errors && (ContactForm.get('mobile').touched || ContactForm.get('mobile').dirty)">
+                                                <span *ngIf="ContactForm.get('mobile').errors.required">Mobile is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Pharmacy Fax</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter fax no" class="form-control" formControlName="fax" required fax>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="ContactForm.get('fax').errors && (ContactForm.get('fax').touched || ContactForm.get('fax').dirty)">
+                                                <span *ngIf="ContactForm.get('fax').errors.required">Fax is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Pharmacy License No</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter license no" class="form-control" formControlName="license_no" required license_no>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="ContactForm.get('license_no').errors && (ContactForm.get('license_no').touched || ContactForm.get('license_no').dirty)">
+                                                <span *ngIf="ContactForm.get('name').errors.required">License no is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">License Expire Date</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <!--<input type="text" placeholder="Enter Expire date" class="form-control" formControlName="expire_date" required expire_date>-->
+                                            <input type="date" id="issueinput3" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Date Opened" formControlName="expire_date" required expire_date>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="ContactForm.get('expire_date').errors && (ContactForm.get('expire_date').touched || ContactForm.get('expire_date').dirty)">
+                                                <span *ngIf="ContactForm.get('expire_date').errors.required">Expire date is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Pharmacy Address</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Enter Address" class="form-control" formControlName="address" required address>
+                                            <span class="form-text text-muted danger"
+                                                *ngIf="ContactForm.get('address').errors && (ContactForm.get('address').touched || ContactForm.get('address').dirty)">
+                                                <span *ngIf="ContactForm.get('address').errors.required">Address is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions center">
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Gotolist()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                                <button *ngIf="showbutton" type="submit" class="btn btn-raised btn-raised btn-primary" (click)="editcontact()"> <i class="fa fa-check-square-o"></i>Submit</button>
+                                <button *ngIf="!showbutton" type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createcontact()"> <i class="fa fa-check-square-o"></i>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

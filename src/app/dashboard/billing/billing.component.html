@@ -1,0 +1,57 @@
+<!--Shopping cart starts-->
+<section id="shopping-cart">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Billing Cart</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-center">
+                            <thead>
+                                <tr>
+                                    <th>Sr. No.</th>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Amount</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of Billingdata; index as i">
+                                    <td>{{i+1}}</td>
+                                    <td>{{data.quantity}}</td>
+                                    <td>$ {{data.product_id}}</td>
+                                    <td>
+                                        {{data.quantity}}
+                                        <div class="btn-group ml-1">
+                                            <a class="btn btn-info btn-raised font-medium-5" href="javascript:void(0)" (click)="discrequantity(data.ids,data.product_id)">-</a>
+                                            <a class="btn btn-info btn-raised font-medium-5" href="javascript:void(0)" (click)="increquantity(data.ids,data.product_id)">+</a>
+                                        </div>
+                                    </td>
+                                    <td>$ {{data.totalprice}}</td>
+                                    <td>
+                                        <a class="danger" data-original-title="" title="" (click)="deletebillingdata(data.ids)">
+                                           <i class="ft-trash font-medium-3"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!--<tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>Total</b></td>
+                                    <td><b>${{Totalprice}}</b></td>
+                                    <td><a href="/invoice" ><button class="btn btn-success btn-raised" >Continue</button></a></td>
+                                </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Shopping cart ends-->

@@ -1,0 +1,127 @@
+<!-- Filter Datatable Options Starts -->
+<section id="extended">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="akhil">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-raised mr-1 btn-primary" (click)="goToaddproduct(':id')">Add Product</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <form [formGroup]="ProductSearch"  novalidate>
+                                        <div class="input-group">
+                                            <div class="col-lg-12">
+                                                <input type="text" placeholder="Search product name" (keyup)="getproductname()" class="form-control" formControlName="search" required search>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductSearch.get('search').errors && (ProductSearch.get('search').touched || ProductSearch.get('search').dirty)">
+                                                    <span *ngIf="ProductSearch.get('search').errors.required">Enter some value</span>
+                                                </span>  
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <select id="projectinput5" class="form-control" id="getpage" (change)="getrecord()">
+                                            <option value="10"  selected>10</option>
+                                            <option value="10000">All</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <a class="btn btn-raised mr-1 btn-primary" (click)="exportAsXLSX()">Download List</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <select  class="form-control" id="getsortpage" (change)="getsortrecord()">
+                                            <option value="name"  selected>Name</option>
+                                            <!-- <option value="expire_date">Expire date</option>-->
+                                           <option value="cat_id">Type</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <select id="gettype"  (change)="gettypedata()" class="form-control">
+                                            <option value="" selected="" disabled="">Select Type</option>
+                                            <option *ngFor="let category of categorydata"  value="{{category.name}}">{{ category.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--<div class="col-lg-4">
+                                    <div class="input-group">
+                                       <input type="date" (change)="getexpiredata()" class="form-control" value="{{myDate}}" id="searchexpire" value="{{myDate | date : 'yyyy-MM-dd'}}">
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Product List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-left">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Type</th>
+                                    <th>Product Name</th>
+                                    <th>Mrp</th>
+                                    <th>Quantity</th>
+                                    <th>Batch No</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of productdata; index as i">
+                                    <td [ngClass]="{'alert alert-secondary':product.quantity <= 10 }">{{itemsPerPage *(currentPage-1)+i+1}}</td>
+                                    <td [ngClass]="{'alert alert-secondary':product.quantity <= 10 }">{{product.cat_id}}</td>
+                                    <td [ngClass]="{'alert alert-secondary':product.quantity <= 10 }">{{product.name}}</td>
+                                    <td [ngClass]="{'alert alert-secondary':product.quantity <= 10 }">₹ {{product.mrp}}</td>
+                                    <td [ngClass]="{'alert alert-secondary':product.quantity <= 10 }">{{product.quantity}}</td>
+                                    <td [ngClass]="{'alert alert-secondary':product.quantity <= 10 }">{{product.batch_no}}</td>
+                                    <td [ngClass]="{'alert alert-secondary':product.quantity <= 10 }">
+                                        <!--<a class="btn btn-raised gradient-purple-bliss white shadow-z-1-hover" data-original-title="" title="" (click)="addbilling(product.id)">
+                                            <i class="ft-plus font-medium-3 mr-2"></i>Add Billing
+                                        </a>-->
+                                        <a class="success p-0" data-original-title="" title="" (click)="goToCreateProduct(product.id)">
+                                            <i class="ft-edit-2 font-medium-3 mr-2"></i>Edit
+                                        </a>
+                                        <!--<a class="danger p-0" data-original-title="" title="">
+                                            <i class="ft-x font-medium-3 mr-2"></i>
+                                        </a>-->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="totalRecords !== ''">
+                    <div class="card-block">
+                        <ngb-pagination (pageChange)="handleChange($event)" [collectionSize]="totalRecords" [(page)]="initialPageValue" [maxSize]="5" [rotate]="true" [pageSize]="10" [boundaryLinks]="true"></ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Filter Datatable Options Ends -->

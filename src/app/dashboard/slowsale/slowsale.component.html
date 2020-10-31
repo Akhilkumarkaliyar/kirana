@@ -1,0 +1,45 @@
+<!-- Filter Datatable Options Starts -->
+<section id="extended">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">No Sale Product List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-left">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Category Name</th>
+                                    <th>SubCategory Name</th>
+                                    <th>Product Name</th>
+                                    <th>Chemical Name</th>
+                                    <th>Mrp</th>
+                                    <th>Selling Price</th>
+                                    <th>Company Name</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of Comingproductdata; index as i">
+                                    <td>{{i+1}}</td>
+                                    <td>{{product.cname}}</td>
+                                    <td>{{product.scname}}</td>
+                                    <td>{{product.name}}</td>
+                                    <td>{{product.chemical_name}}</td>
+                                    <td>{{product.mrp}}</td>
+                                    <td>{{product.selling_price}}</td>
+                                    <td>{{product.company_name}}</td>
+                                    <td>{{product.quantity}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Filter Datatable Options Ends -->

@@ -1,0 +1,133 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="content-header">Vendor Payment Form</div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <form [formGroup]="VendorpaymentForm"  novalidate>
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i> Vendor Payment Info</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Vendor Name <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <select id="" formControlName="vendor_id" class="form-control" (change)="getbill($event.target.value)">
+                                                    <option value="" selected="" disabled="">Vendor Name</option>
+                                                    <option *ngFor="let vendor of vendordata"  value="{{vendor.id}}">{{ vendor.name}}</option>
+                                                </select>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="VendorpaymentForm.get('vendor_id').errors && (VendorpaymentForm.get('vendor_id').touched || VendorpaymentForm.get('vendor_id').dirty)">
+                                                    <span *ngIf="VendorpaymentForm.get('vendor_id').errors.required">Vendor Name required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Bill No <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <!--<input type="text" placeholder="Enter Bill No" class="form-control" formControlName="bill_id" required>-->
+                                                <select id="" formControlName="bill_id" class="form-control" multiple>
+                                                    <option value="" selected="" disabled="">Select Bill</option>
+                                                    <option *ngFor="let bill of bill_id"  value="{{bill.bill_no}}">{{bill.bill_no +' - '+ bill.amount}}</option>
+                                                </select>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="VendorpaymentForm.get('bill_id').errors && (VendorpaymentForm.get('bill_id').touched || VendorpaymentForm.get('bill_id').dirty)">
+                                                    <span *ngIf="VendorpaymentForm.get('bill_id').errors.required">Bill no is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Payment Date <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="date" class="form-control" value="{{paymentdate | date : 'yyyy-MM-dd'}}" id="payment_date" >
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="VendorpaymentForm.get('payment_date').errors && (VendorpaymentForm.get('payment_date').touched || VendorpaymentForm.get('payment_date').dirty)">
+                                                    <span *ngIf="VendorpaymentForm.get('payment_date').errors.required">Payment date is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Payment Amount <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter Payment Amount" class="form-control" formControlName="amount" required>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="VendorpaymentForm.get('amount').errors && (VendorpaymentForm.get('amount').touched || VendorpaymentForm.get('amount').dirty)">
+                                                    <span *ngIf="VendorpaymentForm.get('amount').errors.required">Payment amount is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Payment Mode <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <select id="" formControlName="mode" class="form-control">
+                                                    <option value="" selected="" disabled="">Payment Mode</option>
+                                                    <option value="Cash">Cash</option>
+                                                    <option value="Check">Check</option>
+                                                    <option value="Online">Online</option>
+                                                </select>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="VendorpaymentForm.get('mode').errors && (VendorpaymentForm.get('mode').touched || VendorpaymentForm.get('mode').dirty)">
+                                                    <span *ngIf="VendorpaymentForm.get('mode').errors.required">Payment mode is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions center">
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Gotolist()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                                <button *ngIf="showbutton" type="submit" class="btn btn-raised btn-raised btn-primary" (click)="editvendorpayment()"> <i class="fa fa-check-square-o"></i>Submit</button>
+                                <button *ngIf="!showbutton" type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createvendorpayment()"> <i class="fa fa-check-square-o"></i>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+$(document).ready(function() {
+$('.mdb-select').materialSelect();
+});
+</script>
